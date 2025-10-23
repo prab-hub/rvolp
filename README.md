@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RevExOS Landing Page
 
-## Getting Started
+A stunning landing page for RevExOS - Revenue & Expense Tracking platform built for agencies.
 
-First, run the development server:
+## Features
+
+- 🎨 Modern gradient design with purple/pink theme
+- 📱 Fully responsive (mobile, tablet, desktop)
+- ✨ Smooth animations and hover effects
+- 📧 Waitlist form with email notifications
+- 🚀 Built with Next.js 15, TypeScript, and Tailwind CSS
+
+## Setup Instructions
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure Email Notifications
+
+This landing page uses [Resend](https://resend.com) for email delivery and contact management.
+
+1. Sign up for a free account at [resend.com](https://resend.com)
+2. **Verify your domain** (required for custom email addresses):
+   - Go to [Domains](https://resend.com/domains)
+   - Add your domain (e.g., `mail.revexos.com`)
+   - Add the DNS records (TXT, CNAME, MX) to your DNS provider
+   - Wait for verification (usually a few minutes)
+3. **Create an Audience** for waitlist contacts:
+   - Go to [Audiences](https://resend.com/audiences)
+   - Click "Create Audience"
+   - Name it "RevExOS Waitlist"
+   - Copy the Audience ID (starts with `aud_`)
+4. Get your API key from [resend.com/api-keys](https://resend.com/api-keys)
+5. Add your credentials to `.env.local`:
+
+```
+RESEND_API_KEY=re_your_actual_api_key_here
+RESEND_AUDIENCE_ID=aud_your_audience_id_here
+```
+
+### 3. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the landing page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Test the Waitlist Form
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Open the landing page
+2. Scroll to the "Join the Waitlist" section
+3. Enter an email address
+4. Click "Join Now"
+5. **Three things happen automatically**:
+   - ✅ Contact is saved to your Resend audience
+   - ✅ User receives a confirmation email from `noreply@mail.revexos.com`
+   - ✅ You receive a notification at `contact@cloudifybiz.com`
 
-## Learn More
+## Email Configuration
 
-To learn more about Next.js, take a look at the following resources:
+**User Confirmation Email:**
+- From: `RevExOS <noreply@mail.revexos.com>`
+- Sent to: The person who signed up
+- Contains: Welcome message and next steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Admin Notification Email:**
+- From: `RevExOS Waitlist <waitlist@mail.revexos.com>`
+- Sent to: `contact@cloudifybiz.com`
+- Contains: New signup details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To change the admin email address, edit `app/api/waitlist/route.ts:105`:
 
-## Deploy on Vercel
+```typescript
+to: ["your-email@example.com"],
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Deploy to Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import the repository in [Vercel](https://vercel.com)
+3. Add environment variables in Vercel project settings:
+   - `RESEND_API_KEY`
+   - `RESEND_AUDIENCE_ID`
+4. Deploy!
+
+### Deploy to Other Platforms
+
+Make sure to set these environment variables in your hosting platform:
+- `RESEND_API_KEY` - Your Resend API key
+- `RESEND_AUDIENCE_ID` - Your Resend Audience ID
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Email**: Resend API
+- **Deployment**: Vercel (recommended)
+
+## Project Structure
+
+```
+revexp-landing/
+├── app/
+│   ├── api/
+│   │   └── waitlist/
+│   │       └── route.ts          # Waitlist API endpoint
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Landing page
+├── public/                       # Static assets
+├── .env.local.example            # Environment variables template
+└── README.md                     # This file
+```
+
+## Customization
+
+### Colors
+
+The landing page uses a purple/pink gradient theme. To customize colors, edit the Tailwind classes in `app/page.tsx`:
+
+- Primary gradient: `from-purple-600 to-pink-600`
+- Background: `from-slate-900 via-purple-900 to-slate-900`
+
+### Content
+
+All content is in `app/page.tsx`. Edit the text, features, and benefits sections directly in the file.
+
+## Support
+
+For questions or issues, contact: **contact@cloudifybiz.com**
+
+## License
+
+© 2025 RevExOS. All rights reserved.
