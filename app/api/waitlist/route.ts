@@ -14,62 +14,49 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.RESEND_API_KEY;
     const audienceId = process.env.RESEND_AUDIENCE_ID;
 
-    // Check if environment variables are configured
-    if (!apiKey || !audienceId) {
-      const missing = [];
-      if (!apiKey) missing.push("RESEND_API_KEY");
-      if (!audienceId) missing.push("RESEND_AUDIENCE_ID");
-
-      console.error("Missing environment variables:", {
-        hasApiKey: !!apiKey,
-        hasAudienceId: !!audienceId,
-        missing
-      });
-
+    // Check if API key exists (required)
+    if (!apiKey) {
+      console.error("Missing RESEND_API_KEY");
       return NextResponse.json(
-        { error: `Missing environment variables: ${missing.join(", ")}. Add them in Vercel Settings → Environment Variables.` },
+        { error: "Missing environment variable: RESEND_API_KEY. Add it in Vercel Settings → Environment Variables." },
         { status: 500 }
       );
     }
 
-    // 1. Add contact to Resend audience
-    const addContactResponse = await fetch(
-      `https://api.resend.com/audiences/${audienceId}/contacts`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          email: email,
-          unsubscribed: false,
-          first_name: email.split('@')[0], // Use email prefix as name
-        }),
-      }
-    );
-
-    // Handle duplicate contacts gracefully (409 means already exists)
-    if (!addContactResponse.ok && addContactResponse.status !== 409) {
-      const errorText = await addContactResponse.text();
-      console.error("Failed to add contact:", {
-        status: addContactResponse.status,
-        error: errorText,
-        audienceId: audienceId
-      });
-
-      let errorMessage = "Failed to save contact to audience.";
+    // 1. OPTIONAL: Try to add contact to Resend audience
+    // If API key is restricted or audience doesn't exist, we'll skip this step
+    if (audienceId) {
       try {
-        const errorJson = JSON.parse(errorText);
-        errorMessage = errorJson.message || errorMessage;
-      } catch {
-        // Error text is not JSON, use default message
-      }
+        const addContactResponse = await fetch(
+          `https://api.resend.com/audiences/${audienceId}/contacts`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              email: email,
+              unsubscribed: false,
+              first_name: email.split('@')[0],
+            }),
+          }
+        );
 
-      return NextResponse.json(
-        { error: errorMessage },
-        { status: 500 }
-      );
+        if (addContactResponse.ok || addContactResponse.status === 409) {
+          console.log("✅ Contact saved to audience:", email);
+        } else {
+          const errorText = await addContactResponse.text();
+          console.warn("⚠️ Could not save contact to audience (continuing anyway):", {
+            status: addContactResponse.status,
+            error: errorText
+          });
+        }
+      } catch (audienceError) {
+        console.warn("⚠️ Audience save failed (continuing anyway):", audienceError);
+      }
+    } else {
+      console.log("ℹ️ No audience ID configured, skipping contact save");
     }
 
     // 2. Send confirmation email to user
