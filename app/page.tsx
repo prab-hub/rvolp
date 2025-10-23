@@ -404,7 +404,7 @@ export default function Home() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 px-5 py-3 rounded-full border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 text-base"
+                className="flex-1 px-5 py-3 rounded-full border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 text-base text-gray-900 placeholder:text-gray-400"
               />
               <button
                 type="submit"

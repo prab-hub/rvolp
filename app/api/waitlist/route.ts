@@ -14,6 +14,18 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.RESEND_API_KEY;
     const audienceId = process.env.RESEND_AUDIENCE_ID;
 
+    // Check if environment variables are configured
+    if (!apiKey || !audienceId) {
+      console.error("Missing environment variables:", {
+        hasApiKey: !!apiKey,
+        hasAudienceId: !!audienceId
+      });
+      return NextResponse.json(
+        { error: "Server configuration error. Please contact support." },
+        { status: 500 }
+      );
+    }
+
     // 1. Add contact to Resend audience
     const addContactResponse = await fetch(
       `https://api.resend.com/audiences/${audienceId}/contacts`,
