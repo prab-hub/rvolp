@@ -27,7 +27,7 @@ export default function Home() {
         setStatus("error");
         setMessage("Something went wrong. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setStatus("error");
       setMessage("Network error. Please try again.");
     }
@@ -378,7 +378,7 @@ export default function Home() {
             />
           </div>
           <p className="text-3xl font-semibold text-gray-900 mb-8 leading-relaxed">
-            "RevExOS transformed how we manage our agency finances. We finally understand our true profitability."
+            &quot;RevExOS transformed how we manage our agency finances. We finally understand our true profitability.&quot;
           </p>
           <p className="text-lg text-gray-600">
             Michael Chen, Founder at Creative Studio
