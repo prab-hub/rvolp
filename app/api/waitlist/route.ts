@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "RevExOS <noreply@mail.revexos.com>",
+        from: "RevExOS <onboarding@resend.dev>",
         to: [email],
         subject: "Welcome to RevExOS Waitlist! 🎉",
         html: `
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "RevExOS Waitlist <waitlist@mail.revexos.com>",
+        from: "RevExOS Waitlist <onboarding@resend.dev>",
         to: ["contact@cloudifybiz.com"],
         subject: "🔔 New Waitlist Signup - RevExOS",
         html: `
