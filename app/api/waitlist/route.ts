@@ -16,12 +16,18 @@ export async function POST(request: NextRequest) {
 
     // Check if environment variables are configured
     if (!apiKey || !audienceId) {
+      const missing = [];
+      if (!apiKey) missing.push("RESEND_API_KEY");
+      if (!audienceId) missing.push("RESEND_AUDIENCE_ID");
+
       console.error("Missing environment variables:", {
         hasApiKey: !!apiKey,
-        hasAudienceId: !!audienceId
+        hasAudienceId: !!audienceId,
+        missing
       });
+
       return NextResponse.json(
-        { error: "Server configuration error. Please contact support." },
+        { error: `Missing environment variables: ${missing.join(", ")}. Add them in Vercel Settings → Environment Variables.` },
         { status: 500 }
       );
     }
