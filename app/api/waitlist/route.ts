@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           email: email,
           unsubscribed: false,
+          first_name: email.split('@')[0], // Use email prefix as name
         }),
       }
     );
