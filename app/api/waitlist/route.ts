@@ -59,75 +59,10 @@ export async function POST(request: NextRequest) {
       console.log("ℹ️ No audience ID configured, skipping contact save");
     }
 
-    // 2. Send confirmation email to user
-    const userEmailResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: "RevExOS <onboarding@resend.dev>",
-        to: [email],
-        subject: "Welcome to RevExOS Waitlist! 🎉",
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="background: linear-gradient(to right, #9333ea, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 32px; margin: 0;">
-                RevExOS
-              </h1>
-            </div>
-
-            <h2 style="color: #1f2937; margin-bottom: 16px;">You're on the list! 🎉</h2>
-
-            <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">
-              Thank you for joining the RevExOS waitlist! We're excited to have you as an early user.
-            </p>
-
-            <div style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); padding: 24px; border-radius: 12px; margin: 24px 0;">
-              <p style="color: white; margin: 0; font-size: 16px; line-height: 1.6;">
-                <strong>What's next?</strong><br>
-                We'll notify you as soon as RevExOS launches. Get ready to revolutionize your agency's revenue and expense tracking!
-              </p>
-            </div>
-
-            <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
-              Stay tuned for updates,<br>
-              <strong>The RevExOS Team</strong>
-            </p>
-
-            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;" />
-
-            <p style="color: #9ca3af; font-size: 12px; text-align: center;">
-              You received this email because you signed up for the RevExOS waitlist.
-            </p>
-          </div>
-        `,
-      }),
-    });
-
-    if (!userEmailResponse.ok) {
-      const errorText = await userEmailResponse.text();
-      console.error("Failed to send user email:", {
-        status: userEmailResponse.status,
-        error: errorText
-      });
-
-      let errorMessage = "Failed to send confirmation email.";
-      try {
-        const errorJson = JSON.parse(errorText);
-        errorMessage = errorJson.message || errorMessage;
-      } catch {
-        // Not JSON
-      }
-
-      return NextResponse.json(
-        { error: `User email failed: ${errorMessage}` },
-        { status: 500 }
-      );
-    }
-
-    console.log("✅ Confirmation email sent to:", email);
+    // 2. OPTIONAL: Try to send confirmation email to user
+    // With restricted API keys, this will fail for non-account emails
+    // We'll skip this and just notify the admin instead
+    console.log("ℹ️ Skipping user confirmation email (restricted API key)");
 
     // 3. Send notification email to admin
     const adminEmailResponse = await fetch("https://api.resend.com/emails", {
@@ -138,7 +73,7 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         from: "RevExOS Waitlist <onboarding@resend.dev>",
-        to: ["contact@cloudifybiz.com"],
+        to: ["contact@revexos.com"],
         subject: "🔔 New Waitlist Signup - RevExOS",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -151,7 +86,10 @@ export async function POST(request: NextRequest) {
             </div>
 
             <p style="color: #6b7280; font-size: 14px;">
-              This contact has been automatically added to your Resend audience.
+              <strong>Action needed:</strong> Send a personal welcome email to this person from your email client.
+            </p>
+            <p style="color: #9ca3af; font-size: 12px; margin-top: 10px;">
+              Note: Automatic confirmation emails are disabled (restricted API key). Once you verify your domain and upgrade your Resend API key, confirmation emails will be sent automatically.
             </p>
           </div>
         `,
