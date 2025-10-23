@@ -24,12 +24,15 @@ export default function Home() {
         setMessage("Thanks for joining! We'll be in touch soon.");
         setEmail("");
       } else {
+        const errorData = await response.json();
         setStatus("error");
-        setMessage("Something went wrong. Please try again.");
+        setMessage(errorData.error || "Something went wrong. Please try again.");
+        console.error("Waitlist error:", errorData);
       }
-    } catch {
+    } catch (err) {
       setStatus("error");
       setMessage("Network error. Please try again.");
+      console.error("Network error:", err);
     }
   };
 

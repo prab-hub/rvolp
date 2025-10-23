@@ -45,9 +45,23 @@ export async function POST(request: NextRequest) {
 
     // Handle duplicate contacts gracefully (409 means already exists)
     if (!addContactResponse.ok && addContactResponse.status !== 409) {
-      console.error("Failed to add contact:", await addContactResponse.text());
+      const errorText = await addContactResponse.text();
+      console.error("Failed to add contact:", {
+        status: addContactResponse.status,
+        error: errorText,
+        audienceId: audienceId
+      });
+
+      let errorMessage = "Failed to save contact to audience.";
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorMessage;
+      } catch {
+        // Error text is not JSON, use default message
+      }
+
       return NextResponse.json(
-        { error: "Failed to save contact" },
+        { error: errorMessage },
         { status: 500 }
       );
     }
