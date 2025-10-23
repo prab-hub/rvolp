@@ -99,8 +99,8 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-6 mt-16">
           <div className="relative rounded-3xl overflow-hidden shadow-2xl">
             <Image
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&h=800&fit=crop&q=80"
-              alt="Team collaboration"
+              src="/hero.png"
+              alt="RevExOS Pricing Simulator Dashboard"
               width={1400}
               height={800}
               className="w-full h-auto"
