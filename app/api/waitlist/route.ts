@@ -107,11 +107,27 @@ export async function POST(request: NextRequest) {
     });
 
     if (!userEmailResponse.ok) {
-      console.error(
-        "Failed to send user email:",
-        await userEmailResponse.text()
+      const errorText = await userEmailResponse.text();
+      console.error("Failed to send user email:", {
+        status: userEmailResponse.status,
+        error: errorText
+      });
+
+      let errorMessage = "Failed to send confirmation email.";
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorMessage;
+      } catch {
+        // Not JSON
+      }
+
+      return NextResponse.json(
+        { error: `User email failed: ${errorMessage}` },
+        { status: 500 }
       );
     }
+
+    console.log("✅ Confirmation email sent to:", email);
 
     // 3. Send notification email to admin
     const adminEmailResponse = await fetch("https://api.resend.com/emails", {
@@ -143,11 +159,27 @@ export async function POST(request: NextRequest) {
     });
 
     if (!adminEmailResponse.ok) {
-      console.error(
-        "Failed to send admin email:",
-        await adminEmailResponse.text()
+      const errorText = await adminEmailResponse.text();
+      console.error("Failed to send admin email:", {
+        status: adminEmailResponse.status,
+        error: errorText
+      });
+
+      let errorMessage = "Failed to send admin notification.";
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || errorMessage;
+      } catch {
+        // Not JSON
+      }
+
+      return NextResponse.json(
+        { error: `Admin email failed: ${errorMessage}` },
+        { status: 500 }
       );
     }
+
+    console.log("✅ Admin notification sent to: contact@cloudifybiz.com");
 
     return NextResponse.json(
       { message: "Successfully joined waitlist" },
