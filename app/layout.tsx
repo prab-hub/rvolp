@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,7 +16,13 @@ export const metadata: Metadata = {
   title: "RevExOS - Revenue & Expense Tracking for Agencies",
   description: "The only platform agencies and freelancers need to manage clients, projects, and profitability. Join the waitlist today!",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 
@@ -28,13 +33,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://getlaunchlist.com/js/widget.js" defer></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Script
-          src="https://getlaunchlist.com/js/widget.js"
-          strategy="beforeInteractive"
-        />
         {children}
       </body>
     </html>
