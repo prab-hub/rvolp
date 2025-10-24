@@ -333,27 +333,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonial Style Section */}
-      <section className="py-32">
-        <div className="max-w-[800px] mx-auto px-6 text-center">
-          <div className="mb-8">
-            <Image
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&q=80"
-              alt="User testimonial"
-              width={120}
-              height={120}
-              className="rounded-full mx-auto"
-            />
-          </div>
-          <p className="text-3xl font-semibold text-gray-900 mb-8 leading-relaxed">
-            &quot;RevExOS transformed how we manage our agency finances. We finally understand our true profitability.&quot;
-          </p>
-          <p className="text-lg text-gray-600">
-            Michael Chen, Founder at Creative Studio
-          </p>
-        </div>
-      </section>
-
       {/* Waitlist Section - Apple Style */}
       <section id="waitlist" className="py-32 bg-gray-50">
         <div className="max-w-[600px] mx-auto px-6 text-center">
