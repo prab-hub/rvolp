@@ -1,40 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      if (response.ok) {
-        setStatus("success");
-        setMessage("Thanks for joining! We'll be in touch soon.");
-        setEmail("");
-      } else {
-        const errorData = await response.json();
-        setStatus("error");
-        setMessage(errorData.error || "Something went wrong. Please try again.");
-        console.error("Waitlist error:", errorData);
-      }
-    } catch (err) {
-      setStatus("error");
-      setMessage("Network error. Please try again.");
-      console.error("Network error:", err);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -44,11 +10,11 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Image
-                src="/logo.png"
+                src="/logo_transparent.png"
                 alt="RevExOS"
-                width={180}
-                height={40}
-                className="h-8 w-auto"
+                width={240}
+                height={60}
+                className="h-12 w-auto"
               />
             </div>
             <div className="flex gap-8 items-center">
@@ -399,41 +365,7 @@ export default function Home() {
             Be the first to experience the future of agency financial management.
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="flex-1 px-5 py-3 rounded-full border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 text-base text-gray-900 placeholder:text-gray-400"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-              >
-                {status === "loading" ? "Joining..." : "Get started"}
-              </button>
-            </div>
-
-            {status === "success" && (
-              <div className="bg-green-50 border border-green-200 rounded-2xl p-4 text-green-700 text-sm">
-                {message}
-              </div>
-            )}
-
-            {status === "error" && (
-              <div className="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-700 text-sm">
-                {message}
-              </div>
-            )}
-          </form>
-
-          <p className="text-sm text-gray-500 mt-6">
-            No spam. Unsubscribe anytime.
-          </p>
+          <div className="launchlist-widget" data-key-id="F8IFEk" data-height="180px"></div>
         </div>
       </section>
 
