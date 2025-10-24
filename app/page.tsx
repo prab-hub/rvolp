@@ -26,7 +26,7 @@ export default function Home() {
               </a>
               <a
                 href="#waitlist"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition-colors text-sm font-medium"
+                className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full transition-colors text-sm font-medium"
               >
                 Get started
               </a>
@@ -51,13 +51,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
             <a
               href="#waitlist"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full transition-colors text-base font-medium"
+              className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full transition-colors text-base font-medium"
             >
               Join the waitlist
             </a>
             <a
               href="#features"
-              className="text-blue-600 hover:text-blue-700 text-base font-medium"
+              className="text-green-500 hover:text-green-600 text-base font-medium"
             >
               Learn more →
             </a>
@@ -66,16 +66,15 @@ export default function Home() {
 
         {/* Hero Image */}
         <div className="max-w-[1200px] mx-auto px-6 mt-16">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 p-8">
             <Image
               src="/hero.png"
               alt="RevExOS Pricing Simulator Dashboard"
               width={1400}
               height={800}
-              className="w-full h-auto"
+              className="w-full h-auto rounded-2xl"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
         </div>
       </section>
@@ -106,19 +105,19 @@ export default function Home() {
               </p>
               <ul className="space-y-3 text-lg text-gray-600">
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   One-time, subscription, and usage-based pricing
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Tiered service packages (Basic, Pro, Enterprise)
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Automatic invoice generation from pricing rules
@@ -144,19 +143,19 @@ export default function Home() {
               </p>
               <ul className="space-y-3 text-lg text-gray-600">
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Real-time revenue and expense tracking
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Project-level profitability analysis
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Comprehensive reports by client and service
@@ -204,19 +203,19 @@ export default function Home() {
               </p>
               <ul className="space-y-3 text-lg text-gray-600">
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Team member assignments and permissions
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Client and project management in one place
                 </li>
                 <li className="flex items-start gap-3">
-                  <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Shared visibility across your organization
@@ -237,8 +236,8 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
               <div className="mb-8">
-                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto flex items-center justify-center">
-                  <span className="text-3xl font-semibold text-blue-600">1</span>
+                <div className="w-20 h-20 bg-green-100 rounded-full mx-auto flex items-center justify-center">
+                  <span className="text-3xl font-semibold text-green-500">1</span>
                 </div>
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
@@ -251,8 +250,8 @@ export default function Home() {
 
             <div className="text-center">
               <div className="mb-8">
-                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto flex items-center justify-center">
-                  <span className="text-3xl font-semibold text-blue-600">2</span>
+                <div className="w-20 h-20 bg-green-100 rounded-full mx-auto flex items-center justify-center">
+                  <span className="text-3xl font-semibold text-green-500">2</span>
                 </div>
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
@@ -265,8 +264,8 @@ export default function Home() {
 
             <div className="text-center">
               <div className="mb-8">
-                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto flex items-center justify-center">
-                  <span className="text-3xl font-semibold text-blue-600">3</span>
+                <div className="w-20 h-20 bg-green-100 rounded-full mx-auto flex items-center justify-center">
+                  <span className="text-3xl font-semibold text-green-500">3</span>
                 </div>
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
